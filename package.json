@@ -25,10 +25,10 @@
     "type": "git",
     "url": "http://github.com/openshift/nodejs-ex.git"
   },
-  "author": "Steve Speicher <sspeiche@gmail.com>",
+  "author": "Chris Murphy <rajonwitness@gmail.com>",
   "license": "CC-BY-1.0",
   "bugs": {
-    "url": "http://github.com/openshift/nodejs-ex/issues"
+    "url": "https://github.com/ctmurphy77/nodejs-ex"
   },
-  "homepage": "http://github.com/openshift/nodejs-ex"
+  "homepage": "http://www.chrismurphycode.com"
 }
