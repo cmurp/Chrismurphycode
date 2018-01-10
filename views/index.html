@@ -6,7 +6,7 @@
     <title>Welcome</title>
     <link rel="shortcut icon" href="http://light-the-fuse.com/wp-content/uploads/2015/10/favicon.ico">
     <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand" rel="stylesheet">
     <script src="https://use.fontawesome.com/24f089756e.js"></script>
     <style>
       body > div > div > div.off-canvas-content {
@@ -22,7 +22,6 @@
         -webkit-animation-fill-mode: forwards;
         animation: backgroundScroll 15s linear 1;
         animation-fill-mode: forwards;
-        padding-top: 10px;
       }
 
       @-webkit-keyframes backgroundScroll {
@@ -34,6 +33,23 @@
         from {background-position: 0 0;}
         to {background-position: -180px 0px;}
       }
+      body{
+        font-family: 'Quicksand', sans-serif;
+        color: #db7720;
+      }
+      .neon {
+  color: #fff;
+  text-shadow:
+/*    0 0 5px #fff,
+    0 0 10px #fff,   */
+    0 0 20px #fff,
+/*    0 0 40px #db7720,*/
+    0 0 80px #db7720,
+    0 0 90px #db7720,
+    0 0 100px #db7720,
+    0 0 150px #db7720;
+    font-family: 'Pacifico'
+}
     </style>
   </head>
   <body>
@@ -45,7 +61,7 @@
           <div class="row column">
             <br>
             <img class="thumbnail" src="http://placehold.it/550x350">
-            <h5 style="font-family: 'Herr Von Muellerhoff', cursive; font-size:3rem">Chris Murphy</h5>
+            <h5 class="neon" style="font-family: 'Pacifico', cursive; font-size:3rem; margin-top:15px;margin-bottom:35px">Chris Murphy</h5>
             <p><b>Full-time Software engineer at IBM.</b><br>Free-time web and game developer. If you would like to collaborate on something please contact me below <i class="fa fa-smile-o"></i></p>
           </div>
         </div>
@@ -57,14 +73,13 @@
               <span class="title-bar-title">Chris Murphy</span>
             </div>
           </div>
-          <div class="callout warning" style="margin-bottom: 0">
+          <div class="callout" style="margin-bottom: 0; background: linear-gradient(to bottom right, #db7720, orange, yellow); color:black">
             <div class="row column">
-              <h1>Welcome to my website.</h1>
-              <p class="lead">Here are some of the things I've been working on, please feel free to reach out with any bugs, questions, or comments!</p>
+              <h1 class="neon">Welcome!<br></h1>
             </div>
           </div>
 
-          <div class="row small-up-2 medium-up-3 large-up-4">
+          <div class="row small-up-2 medium-up-3 large-up-4" style="padding-top: 2.5em;">
             <div class="column">
               <img class="thumbnail" src="http://placehold.it/550x550">
               <h5>My Site</h5>
