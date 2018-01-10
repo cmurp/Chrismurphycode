@@ -2,7 +2,7 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
-    
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -92,6 +92,7 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
