@@ -6,6 +6,8 @@ var express = require('express'),
 
 Object.assign=require('object-assign')
 
+require('dotenv').config() // get/set environment variables
+
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
 

@@ -3,3 +3,6 @@ npm-debug.log
 
 #test database files
 db/*
+
+*environment specific variables
+*.env
