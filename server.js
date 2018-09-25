@@ -47,6 +47,7 @@ var initDb = function(callback) {
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
       callback(err);
+      console.log('MongoURL invalid: %s', mongoURL);
       return;
     }
 
@@ -73,6 +74,7 @@ app.get('/', function (req, res) {
       if (err) {
         console.log('Error running count. Message:\n'+err);
       }
+      console.log('Count: ' + count);
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
