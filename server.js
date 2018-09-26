@@ -8,14 +8,18 @@ Object.assign=require('object-assign')
 
 require('dotenv').config() // get/set environment variables
 
-app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
 app.use(morgan('combined'))
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 //FORM HANDLING CODE
-app.use(require('body-parser')());
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.use(require('./lib/post.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));

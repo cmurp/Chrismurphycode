@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <% include ./partials/head %>
+    </head>
+    <body>
+        <h1>Project Blogs</h1>
+
+        <% for(let i = 0; i < posts.length; i++) { %>
+            <article>
+                <p><%= posts[i].body %></p>
+            </article>
+        <% } %>
+
+        <form action="addPost">
+            <textarea name="body"></textarea>
+            <input type="submit" value="Add Post" />
+        </form>
+    </body>
+</html>
