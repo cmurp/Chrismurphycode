@@ -26,15 +26,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 500 error handler (middleware)
 app.use(function(err, req, res, next){
- console.error(err.stack);
- res.status(500);
- res.render('500.html');
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
 });
 
 // 404 catch-all handler (middleware)
 app.use(function(req, res, next){
- res.status(404);
- res.render('404.html');
+    res.status(404);
+    res.render('404');
 });
 
 app.listen(port, ip);
