@@ -1,0 +1,19 @@
+<html>
+<head>
+    <% include ./partials/head %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.11/css/mdb.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Project Blogs <% projects.length %></h1>
+        <% for(let i = 0; i < projects.length; i++) { %>
+            <h3>Post - <%= projects[i].title %></h3>
+            <% for(x in projects[i].tags) { %>
+                <label><span class="badge purple"><%= x %></span></label>
+            <% } %>
+            <article>
+                <p><%= projects[i].github %></p>
+            </article>
+        <% } %>
+</body>
+</html>
