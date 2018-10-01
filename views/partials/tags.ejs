@@ -3,7 +3,7 @@
   <% for(let i = 0; i < tags.length; i++) { %>
       <div class="form-check" id="<%= tags[i]._id %>">
         <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] >
-        <label><span class="badge purple"><%= tags[i].tag %></span>&nbsp;
+        <label><span class="badge" style="background-color: <%= tags[i].color %>"><%= tags[i].tag %></span>&nbsp;
             <button type="button" class="close removeTagButton" aria-label="Close" value="<%= tags[i]._id %>">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -15,6 +15,7 @@
 <div class="form-check">
     <label>
         <input class="form-control form-control-sm" id="tag" type="text">
+        <input type="color" id="tagColor" name="color" value="#e66465" />
     </label>
     <div class="btn btn-success btn-sm" id="tagButton">Add tag</div>
 </div>
@@ -24,6 +25,7 @@
                 e.preventDefault();
                 var data = {};
                 data.tag = document.getElementById("tag").value;
+                data.color = document.getElementById("tagColor").value;
 
                 $.ajax({
                     type: 'POST',
@@ -33,9 +35,9 @@
                     success: function(data) {
                         console.log('success');
                         var newTag = data;
-                        $(".tags").append("<div class='form-check'><input type='checkbox' class='form-check-input' id='featured' name=tags[" + newTag + "] >" +
-                          "<label><span class='badge purple'>" + newTag + "</span>&nbsp;<button type='button' class='close removeTagButton' aria-label='Close'" +
-                          "value='" + newTag + "'><span aria-hidden='true'>&times;</span></button></label></div>");
+                        $(".tags").append("<div class='form-check'><input type='checkbox' class='form-check-input' id='featured' name=tags[" + newTag.tag + "] >" +
+                          "<label><span class='badge' style='background-color:" + newTag.color + ";'>" + newTag.tag + "</span>&nbsp;<button type='button' class='close removeTagButton' aria-label='Close'" +
+                          "value='" + newTag.tag + "'><span aria-hidden='true'>&times;</span></button></label></div>");
                     }
                 });
             });
