@@ -166,14 +166,14 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="projects">
       <div class="my-auto" id="projects-content">
-        <h2 class="mb-5"><a href="https://chrismurphycode.com/projects">Creations</a></h2>
+        <h2 class="mb-5"><a href="projects">Creations</a></h2>
         <% for(let i = 0; i < projects.length; i++) { %>
             <article>
-                <h3><a href="<%= projects[i].github %>"><%= projects[i].github %></a></h3>
+                <h4><a href="projects/<%= projects[i].name %>"><%= projects[i].name %></a></h4>
+                <p>Check it out on <a href="https://<%= projects[i].github %>">github</a></p>
                 <p><%= projects[i].description %></p>
             </article>
         <% } %>
-        <h3 class="mb-5">I'm changing this section to not be hard coded and to more of a blog format, so coming soon!</h3>
     </section>
 
     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">

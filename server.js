@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-app.use(require('./lib/post.js'));
+app.use(require('./lib/routes.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
