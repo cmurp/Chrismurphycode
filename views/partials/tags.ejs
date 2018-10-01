@@ -1,0 +1,61 @@
+<h5>Tags</h5>
+<div class="form-group tags">
+  <% for(let i = 0; i < tags.length; i++) { %>
+      <div class="form-check" id="<%= tags[i]._id %>">
+        <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] >
+        <label><span class="badge purple"><%= tags[i].tag %></span>&nbsp;
+            <button type="button" class="close removeTagButton" aria-label="Close" value="<%= tags[i]._id %>">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </label>
+      </div>
+  <% } %>
+  </div>
+
+<div class="form-check">
+    <label>
+        <input class="form-control form-control-sm" id="tag" type="text">
+    </label>
+    <div class="btn btn-success btn-sm" id="tagButton">Add tag</div>
+</div>
+<script type="text/javascript">
+        $(function(){
+            $('#tagButton').click(function(e){
+                e.preventDefault();
+                var data = {};
+                data.tag = document.getElementById("tag").value;
+
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    url: 'http://localhost:8080/addTag',
+                    success: function(data) {
+                        console.log('success');
+                        var newTag = data;
+                        $(".tags").append("<div class='form-check'><input type='checkbox' class='form-check-input' id='featured' name=tags[" + newTag + "] >" +
+                          "<label><span class='badge purple'>" + newTag + "</span>&nbsp;<button type='button' class='close removeTagButton' aria-label='Close'" +
+                          "value='" + newTag + "'><span aria-hidden='true'>&times;</span></button></label></div>");
+                    }
+                });
+            });
+        });
+        $(function(){
+            $('.removeTagButton').click(function(e){
+                e.preventDefault();
+                var data = {};
+                data.tag = $(this).val();;
+
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    url: 'http://localhost:8080/removeTag',
+                    success: function() {
+                        console.log('success');
+                        $(".tags").children("#"+data.tag).remove();
+                    }
+                });
+            });
+        });
+</script>
