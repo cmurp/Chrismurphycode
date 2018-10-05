@@ -2,17 +2,33 @@
 <head>
     <% include ./partials/head %>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.11/css/mdb.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+    $( document ).ready(function() {
+        <% for(let i = 0; i < posts.length; i++) { %>
+            <% for(tag in posts[i].tags){ %>
+                $.ajax({
+                    type: 'POST',
+                    data: {tag : '<%= tag %>'},
+                    url: '/getTag',
+                    success: function(data) {
+                        var newTag = data;
+                        $("#<%= posts[i]._id %>-tags").append('<label><span class="badge" style="background-color: ' + newTag.color + '">' + newTag.tag + '</span></label>');
+                    }
+                });
+            <% } %>
+        <% } %>
+    });
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Dev Blog for <%= project %></h1>
+        <h1>Dev Blog for <%= project.name %></h1>
         <% for(let i = 0; i < posts.length; i++) { %>
-            <h3>Post - <%= posts[i].title %> - <%= posts[i].time %></h3>
-            <% for(x in posts[i].tags) { %>
-                <label><span class="badge" style="background-color: <%= x.color %>"><%= x %></span></label>
-            <% } %>
+            <h3><a href="/projects/<%= project.name %>/<%= posts[i].title %>"><%= posts[i].title %></a></h3> <%= posts[i].time %>
+            <article id="<%= posts[i]._id %>-tags"></article>
             <article>
-                <p><%= posts[i].github %></p>
+                Check it out on <a href="%= posts[i].github %>">github.</a>
             </article>
         <% } %>
 </body>

@@ -3,16 +3,32 @@
     <% include ./partials/head %>
     <link href="/css/resume.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.11/css/mdb.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+    $( document ).ready(function() {
+        <% for(let i = 0; i < projects.length; i++) { %>
+            <% for(tag in projects[i].tags){ %>
+                $.ajax({
+                    type: 'POST',
+                    data: {tag : '<%= tag %>'},
+                    url: '/getTag',
+                    success: function(data) {
+                        var newTag = data;
+                        $("#<%= projects[i]._id %>-tags").append('<label><span class="badge" style="background-color: ' + newTag.color + '">' + newTag.tag + '</span></label>');
+                    }
+                });
+            <% } %>
+        <% } %>
+    });
+    </script>
 </head>
 <body>
     <% include ./partials/sidebar %>
     <div class="container">
         <h1>Projects</h1>
         <% for(let i = 0; i < projects.length; i++) { %>
-            <h3><%= projects[i].name %></h3>
-            <% for(x in projects[i].tags) { %>
-                <label><span class="badge purple"><%= x %></span></label>
-            <% } %>
+            <h3><a href="/projects/<%= projects[i].name %>"><%= projects[i].name %></a></h3>
+            <article id="<%= projects[i]._id %>-tags"></article>
             <article>
                 <p>Check it out on <a href="<%= projects[i].github %>">github</a></p>
             </article>
