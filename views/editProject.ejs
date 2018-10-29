@@ -1,0 +1,30 @@
+<html>
+<head>
+    <% include ./partials/head %>
+    <script>
+    </script>
+</head>
+<body>
+    <% include ./partials/sidebar %>
+    <div class="container-fluid p-0">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
+            <li class="breadcrumb-item"><a href="/projects/<%= project %>"><%= project.name %></a></li>
+          </ol>
+        <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+            <div class="resume-item d-flex flex-column flex-md-row">
+              <div class="mr-auto">
+                <h1>Posts for <%= project.name %></h1>
+                <% for(let i = 0; i < posts.length; i++) { %>
+                    <h3><a href="/projects/<%= project.name %>/<%= posts[i].title %>"><%= posts[i].title %></a></h3> <%= posts[i].time %>
+                    <article id="<%= posts[i]._id %>-tags"></article>
+                    <article>
+                        <a href="/admin/editPost/<%= project.name %>/<%= posts[i].title %>">Edit</a>
+                    </article>
+                <% } %>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
