@@ -11,6 +11,104 @@
             <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
             <li class="breadcrumb-item"><a href="/projects/<%= project %>"><%= project.name %></a></li>
           </ol>
+
+          <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+              <div class="resume-item d-flex flex-column flex-md-row">
+                <div class="mr-auto">
+                    <h1>Edit Project</h1>
+                    <form method="post" action="/editProject">
+                        <input id="id" name="id" type="hidden" value="<%= project._id %>">
+
+                        <div class="form-group">
+                          <label for="name">Project Name</label>
+                          <input class="form-control form-control-sm" id="name" name="name" type="text" value="<%= project.name %>">
+                        </div>
+
+                        <div class="form-group">
+                          <label for="github">Github Link</label>
+                          <input class="form-control form-control-sm" id="github" name="github" type="text" value="<%= project.github %>">
+                        </div>
+
+                        <h5>Tags</h5>
+                        <div class="form-group tags">
+                          <% for(let i = 0; i < tags.length; i++) { %>
+                              <div class="form-check" id="<%= tags[i]._id %>">
+                                <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] <% if (tags[i].tag in project.tags) { %>  checked <% } %>>
+                                <label><span class="badge" style="background-color: <%= tags[i].color %>"><%= tags[i].tag %></span>&nbsp;
+                                    <button type="button" class="close removeTagButton" aria-label="Close" value="<%= tags[i]._id %>">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </label>
+                              </div>
+                          <% } %>
+                          </div>
+
+                        <div class="form-check">
+                            <label>
+                                <input class="form-control form-control-sm" id="tag" type="text">
+                                <input type="color" id="tagColor" name="color" value="#e66465" />
+                                <div class="btn btn-success btn-sm" id="tagButton">Add tag</div>
+                            </label>
+                        </div>
+                        <script type="text/javascript">
+                                $(function(){
+                                    $('#tagButton').click(function(e){
+                                        e.preventDefault();
+                                        var data = {};
+                                        data.tag = document.getElementById("tag").value;
+                                        data.color = document.getElementById("tagColor").value;
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            data: JSON.stringify(data),
+                                            contentType: 'application/json',
+                                            url: 'http://localhost:8080/addTag',
+                                            success: function(data) {
+                                                console.log('success');
+                                                var newTag = data;
+                                                $(".tags").append("<div class='form-check'><input type='checkbox' class='form-check-input' id='featured' name=tags[" + newTag.tag + "] >" +
+                                                  "<label><span class='badge' style='background-color:" + newTag.color + ";'>" + newTag.tag + "</span>&nbsp;<button type='button' class='close removeTagButton' aria-label='Close'" +
+                                                  "value='" + newTag.tag + "'><span aria-hidden='true'>&times;</span></button></label></div>");
+                                            }
+                                        });
+                                    });
+                                });
+                                $(function(){
+                                    $('.removeTagButton').click(function(e){
+                                        e.preventDefault();
+                                        var data = {};
+                                        data.tag = $(this).val();;
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            data: JSON.stringify(data),
+                                            contentType: 'application/json',
+                                            url: 'http://localhost:8080/removeTag',
+                                            success: function() {
+                                                console.log('success');
+                                                $(".tags").children("#"+data.tag).remove();
+                                            }
+                                        });
+                                    });
+                                });
+                        </script>
+
+                      <div class="form-group">
+                        <label for="description">Project Description</label>
+                        <textarea class="form-control" name="description" rows="10"><%= project.description %></textarea>
+                      </div>
+                      <div class="form-group">
+                          <input type="submit" class="btn btn-primary">
+                              <label>
+                                  <input data-toggle="toggle" type="checkbox" name="featured" <% if (project.featured) { %> checked <% } %> >
+                                  Featured
+                              </label>
+                      </div>
+                    </form>
+                </div>
+              </div>
+          </section>
+
         <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
             <div class="resume-item d-flex flex-column flex-md-row">
               <div class="mr-auto">
