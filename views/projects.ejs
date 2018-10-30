@@ -1,23 +1,6 @@
 <html>
 <head>
     <% include ./partials/head %>
-    <script>
-    $( document ).ready(function() {
-        <% for(let i = 0; i < projects.length; i++) { %>
-            <% for(tag in projects[i].tags){ %>
-                $.ajax({
-                    type: 'POST',
-                    data: {tag : '<%= tag %>'},
-                    url: '/getTag',
-                    success: function(data) {
-                        var newTag = data;
-                        $("#<%= projects[i]._id %>-tags").append('<label><span class="badge" style="background-color: ' + newTag.color + '">' + newTag.tag + '</span></label>');
-                    }
-                });
-            <% } %>
-        <% } %>
-    });
-    </script>
 </head>
 <body>
     <% include ./partials/sidebar %>
@@ -38,5 +21,22 @@
     </section>
 </div>
 <% include ./partials/scripts %>
+<script>
+$( document ).ready(function() {
+    <% for(let i = 0; i < projects.length; i++) { %>
+        <% for(tag in projects[i].tags){ %>
+            $.ajax({
+                type: 'POST',
+                data: {tag : '<%= tag %>'},
+                url: '/getTag',
+                success: function(data) {
+                    var newTag = data;
+                    $("#<%= projects[i]._id %>-tags").append('<label><span class="badge" style="background-color: ' + newTag.color + '">' + newTag.tag + '</span></label>');
+                }
+            });
+        <% } %>
+    <% } %>
+});
+</script>
 </body>
 </html>

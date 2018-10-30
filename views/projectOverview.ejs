@@ -1,23 +1,6 @@
 <html>
 <head>
     <% include ./partials/head %>
-    <script>
-    $( document ).ready(function() {
-        <% for(let i = 0; i < posts.length; i++) { %>
-            <% for(tag in posts[i].tags){ %>
-                $.ajax({
-                    type: 'POST',
-                    data: {tag : '<%= tag %>'},
-                    url: '/getTag',
-                    success: function(data) {
-                        var newTag = data;
-                        $("#<%= posts[i]._id %>-tags").append('<label><span class="badge" style="background-color: ' + newTag.color + '">' + newTag.tag + '</span></label>');
-                    }
-                });
-            <% } %>
-        <% } %>
-    });
-    </script>
 </head>
 <body>
     <% include ./partials/sidebar %>
@@ -42,5 +25,22 @@
         </section>
     </div>
     <% include ./partials/scripts %>
+    <script>
+    $( document ).ready(function() {
+        <% for(let i = 0; i < posts.length; i++) { %>
+            <% for(tag in posts[i].tags){ %>
+                $.ajax({
+                    type: 'POST',
+                    data: {tag : '<%= tag %>'},
+                    url: '/getTag',
+                    success: function(data) {
+                        var newTag = data;
+                        $("#<%= posts[i]._id %>-tags").append('<label><span class="badge" style="background-color: ' + newTag.color + '">' + newTag.tag + '</span></label>');
+                    }
+                });
+            <% } %>
+        <% } %>
+    });
+    </script>
 </body>
 </html>
