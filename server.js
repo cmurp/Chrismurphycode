@@ -2,7 +2,8 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
-    path    = require("path");
+    path    = require("path"),
+    session = require('express-session');
 
 Object.assign=require('object-assign')
 
@@ -19,6 +20,16 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+// config express-session
+var sess = {
+  secret: process.env.SESSION_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: true
+};
+
+app.use(session(sess));
 app.use(bodyParser.json());
 app.use(require('./lib/routes.js'));
 
