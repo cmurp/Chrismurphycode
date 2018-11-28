@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.use(morgan('combined'))
 
 var port = process.env.PORT || 8080,
-    ip   = process.env.IP   || '0.0.0.0';
+    ip   = process.env.IP   || 'localhost';
 
 //FORM HANDLING CODE
 const bodyParser = require("body-parser");

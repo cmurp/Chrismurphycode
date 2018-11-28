@@ -1,7 +1,7 @@
 {
   "name": "nodejs-ex",
   "version": "0.0.1",
-  "description": "Node.js sample app for OpenShift 3",
+  "description": "personal node.js website",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.3",
