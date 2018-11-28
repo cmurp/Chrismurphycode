@@ -9,7 +9,7 @@ $(function(){
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:8080/addTag',
+            url: '/addTag',
             success: function(data) {
                 console.log('success');
                 var newTag = data;
@@ -30,7 +30,7 @@ $(function(){
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:8080/removeTag',
+            url: '/removeTag',
             success: function() {
                 console.log('success');
                 $(".tags").children("#"+data.tag).remove();
