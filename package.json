@@ -26,12 +26,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/openshift/nodejs-ex.git"
+    "url": "https://github.com/ctmurphy77/Chrismurphycode.git"
   },
   "author": "Chris Murphy <rajonwitness@gmail.com>",
   "license": "CC-BY-1.0",
-  "bugs": {
-    "url": "https://github.com/ctmurphy77/nodejs-ex"
-  },
   "homepage": "http://www.chrismurphycode.com"
 }

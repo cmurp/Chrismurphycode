@@ -1,2 +1,3 @@
+This is my personal website with secured blogging functionality written through NodeJS and hosted on digitalocean.
 
-This is my personal website based on the example node setup given by redhat openshift, which is where the site is hosted. The frontend is based on a Bulma template from edwardawebb.com
+It uses nodejs, passport, and mongodb, and the frontend is based on a Bulma css template from edwardawebb.com

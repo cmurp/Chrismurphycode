@@ -12,8 +12,8 @@ require('dotenv').config() // get/set environment variables
 app.set('view engine', 'ejs');
 app.use(morgan('combined'))
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+var port = process.env.PORT || 8080,
+    ip   = process.env.IP   || '0.0.0.0';
 
 //FORM HANDLING CODE
 const bodyParser = require("body-parser");
