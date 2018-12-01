@@ -31,7 +31,7 @@
                         <div class="form-group tags">
                           <% for(let i = 0; i < tags.length; i++) { %>
                               <div class="form-check" id="<%= tags[i]._id %>">
-                                <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] <% if (tags[i].tag in project.tags) { %>  checked <% } %>>
+                                <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] <% if (project.tags && tags[i].tag in project.tags) { %>  checked <% } %>>
                                 <label><span class="badge" style="background-color: <%= tags[i].color %>"><%= tags[i].tag %></span>&nbsp;
                                     <button type="button" class="close removeTagButton" aria-label="Close" value="<%= tags[i]._id %>">
                                         <span aria-hidden="true">&times;</span>
