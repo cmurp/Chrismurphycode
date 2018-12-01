@@ -1,14 +1,16 @@
 <h5>Tags</h5>
 <div class="form-group tags">
-  <% for(let i = 0; i < tags.length; i++) { %>
-      <div class="form-check" id="<%= tags[i]._id %>">
-        <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] >
-        <label><span class="badge" style="background-color: <%= tags[i].color %>"><%= tags[i].tag %></span>&nbsp;
-            <button type="button" class="close removeTagButton" aria-label="Close" value="<%= tags[i]._id %>">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </label>
-      </div>
+    <% if (tags) { %>
+      <% for(let i = 0; i < tags.length; i++) { %>
+          <div class="form-check" id="<%= tags[i]._id %>">
+            <input type="checkbox" class="form-check-input" id="featured" name=tags[<%= tags[i].tag %>] >
+            <label><span class="badge" style="background-color: <%= tags[i].color %>"><%= tags[i].tag %></span>&nbsp;
+                <button type="button" class="close removeTagButton" aria-label="Close" value="<%= tags[i]._id %>">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </label>
+          </div>
+      <% } %>
   <% } %>
   </div>
 
