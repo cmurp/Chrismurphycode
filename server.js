@@ -7,10 +7,10 @@ var express = require('express'),
 
 Object.assign=require('object-assign')
 
-require('dotenv').config() // get/set environment variables
+require('dotenv').config(); // get/set environment variables
 
 app.set('view engine', 'ejs');
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 
 var port = process.env.PORT || 8080,
     ip   = process.env.IP   || 'localhost';
