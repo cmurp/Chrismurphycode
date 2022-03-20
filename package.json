@@ -9,7 +9,7 @@
     "ejs": "^2.7.4",
     "express": "^4.13.4",
     "express-session": "^1.17.1",
-    "mongodb": "^2.1.16",
+    "mongodb": "^4.4.1",
     "morgan": "^1.10.0",
     "object-assign": "4.1.0",
     "passport": "^0.4.1",
