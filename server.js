@@ -31,6 +31,9 @@ var sess = {
 
 app.use(session(sess));
 app.use(bodyParser.json());
+
+const dbo = require('./lib/mongodb.js');
+
 app.use(require('./lib/routes.js'));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,7 +51,17 @@ app.use(function(req, res, next){
     res.render('404');
 });
 
-app.listen(port, ip);
-console.log('Server running on http://%s:%s', ip, port);
+// perform a database connection when the server starts
+dbo.connectToServer(function (err) {
+    if (err) {
+      console.error(err);
+      process.exit();
+    }
+  
+    // start the Express server
+    app.listen(port, ip, callback= () => {
+      console.log(`Server is running on port: ${port}`);
+    }); 
+  });
 
 module.exports = app ;
