@@ -1,6 +1,6 @@
 <html>
 <head>
-    <% include ./partials/head %>
+    <%- include ('./partials/head'); %>
 </head>
 <body>
     <div class="container">
@@ -16,7 +16,7 @@
               <input class="form-control form-control-sm" id="github" name="github" type="text">
             </div>
 
-            <% include ./partials/tags %>
+            <%- include('./partials/tags'); %>
 
             <div class="form-check">
                 <select class="mdb-select md-form" name="project">
@@ -34,7 +34,7 @@
           <input type="submit" class="btn btn-primary">
         </form>
     </div>
-    <% include ./partials/scripts %>
+    <%- include ('./partials/scripts') %>
     <script type="text/javascript" src="/js/tags.js"></script>
     <script>
          $(document).ready(function(){

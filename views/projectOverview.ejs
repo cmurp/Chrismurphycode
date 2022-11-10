@@ -1,9 +1,9 @@
 <html>
 <head>
-    <% include ./partials/head %>
+    <%- include ('./partials/head'); %>
 </head>
 <body>
-    <% include ./partials/sidebar %>
+    <%- include ('./partials/sidebar'); %>
     <div class="container-fluid p-0">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
@@ -24,7 +24,7 @@
             </div>
         </section>
     </div>
-    <% include ./partials/scripts %>
+    <%- include ('./partials/scripts'); %>
     <script>
     $( document ).ready(function() {
         <% for(let i = 0; i < posts.length; i++) { %>

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <% include ./partials/head %>
+    <%- include ('./partials/head'); %>
 
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
               <label for="github">Github Link</label>
               <input class="form-control form-control-sm" id="github" name="github" type="text">
             </div>
-            <% include ./partials/tags %>
+            <%- include ('./partials/tags') %>
 
           <div class="form-group">
             <label for="description">Project Description</label>
@@ -33,7 +33,7 @@
           </div>
         </form>
     </div>
-    <% include ./partials/scripts %>
+    <%- include ('./partials/scripts') %>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script type="text/javascript" src="/js/tags.js"></script>
 </body>

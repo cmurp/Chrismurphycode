@@ -1,6 +1,6 @@
 <html>
 <head>
-    <% include ./partials/head %>
+    <%- include ('./partials/head'); %>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <% include ./partials/sidebar %>
+    <%- include ('./partials/sidebar'); %>
     <div class="container-fluid p-0">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
@@ -31,7 +31,7 @@
             </div>
       </section>
   </div>
-  <% include ./partials/scripts %>
+  <%- include ('./partials/scripts'); %>
   <script>
   $( document ).ready(function() {
       <% for(tag in post.tags){ %>
