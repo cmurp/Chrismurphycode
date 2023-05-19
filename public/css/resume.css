@@ -149,3 +149,27 @@ a:hover, a:focus, a:active {
 img {
   max-width:80%;
 }
+
+.logo {
+  width: 10rem;
+  min-height: 5rem;
+  font-size:xx-large;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow:  6px 6px 12px #23272c, -6px -6px 12px #454d54;
+  margin: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: -.1rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.logo > span {
+
+}
+
+.bg-dark {
+  color: #76858f !important;
+}

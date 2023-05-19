@@ -1,0 +1,76 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import Logo from '../../branding/logo';
+import { useSideNavStateContext } from './context/side-nav-state';
+
+interface TopNavigationProps {
+  logo?: string;
+  icon?: string;
+}
+
+const Navigation = styled.nav`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #111111;
+  color: teal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 999;
+`;
+
+const Icon = styled.div`
+  font-size: 24px;
+`;
+
+const Hamburger = styled.button`
+  font-size: 24px;
+  background: none;
+  color: teal;
+  border: none;
+  cursor: pointer;
+`;
+
+const TopNav: React.FC<TopNavigationProps> = ({ logo, icon }) => {
+  const { isOpen, setIsOpen } = useSideNavStateContext();
+
+  const handleScroll = () => {
+    const navigation = document.getElementById('top-nav');
+    if (navigation && window.pageYOffset > 0) {
+      navigation.classList.add('fixed');
+    } else if (navigation) {
+      navigation.classList.remove('fixed');
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  }; 
+
+
+  return (
+    <Navigation id="top-nav">
+      <Hamburger onClick={handleToggle}>☰</Hamburger>
+      {logo && <Logo alt="logo"></Logo>}
+      {icon && <Icon>{icon}</Icon>}
+
+    </Navigation>
+  );
+};
+
+TopNav.defaultProps = {
+    logo: 'Logo',
+    icon: 'Icon',
+};
+
+export default TopNav;
