@@ -60,9 +60,9 @@ const TopNav: React.FC<TopNavigationProps> = ({ logo, icon }) => {
 
   return (
     <Navigation id="top-nav">
-      <Hamburger onClick={handleToggle}>☰</Hamburger>
+      <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
       {logo && <Logo alt="logo"></Logo>}
-      {icon && <Icon>{icon}</Icon>}
+      {icon && <Icon><BiCog/></Icon>}
 
     </Navigation>
   );
