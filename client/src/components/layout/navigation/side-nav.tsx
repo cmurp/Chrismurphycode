@@ -6,6 +6,8 @@ import { useOrientationContext } from './context/orientation';
 import { useSideNavStateContext } from './context/side-nav-state';
 import { useButtonClickedContext } from './context/buttonClicked';
 
+import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
+
 interface Link {
   text: string;
   href: string;
@@ -50,68 +52,57 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
   const { isOpen, setIsOpen } = useSideNavStateContext();
   const { isClicked, setIsClicked } = useButtonClickedContext();
 
-  const setOpen = () => {
-    if (isVertical) {
-      setIsOpen(false);
-    } else {
+  const openForHorizontal = () => {
+    if (!isVertical) {
       setIsOpen(true);
+    } else {
+      setIsOpen(false);
     }
   };
-
+  
   React.useEffect(() => {
-    setOpen();
-  }, [isVertical]);
-
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    setOpen();
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        isVertical &&
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        // Clicked outside the container
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    openForHorizontal();
   }, []);
+
+  React.useEffect(() => {
+    openForHorizontal();
+  }, [isVertical]);
 
   const handleClicked = () => {
     setIsClicked(true);
-    setOpen();
+    setIsOpen(false);
   };
   
-  /*
-      {links && links.length > 0 && (
-       // renderLinks(links)
-      )}
+  {links && links.length > 0 && (
+    renderLinks(links)
+  )}
 
-            <UserManagementContainer>
-        <UserIcon src="user-icon.svg" alt="User Icon" />
-        <NotificationIcon src="notification-icon.svg" alt="Notification Icon" />
-      </UserManagementContainer>
-  */
+  <UserManagementContainer>
+    <UserIcon src="user-icon.svg" alt="User Icon" />
+    <NotificationIcon src="notification-icon.svg" alt="Notification Icon" />
+  </UserManagementContainer>
 
-
-  return (
-    <NavContainer ref={containerRef} className={`${isOpen ? '' : 'hidden'} ${isVertical ? 'absolute' : ''}`}>
-      { !isVertical && (
+return (
+  <NavContainer className={`${isOpen ? '' : 'hidden'} ${isVertical ? 'absolute' : ''}`}>
+    { !isVertical && (
+      <>
         <LogoContainer>
-          <Logo alt="logo"></Logo>
+          <Logo alt="logo" />
         </LogoContainer>
-      )}
-      <ActivateButton onClick={handleClicked}>ACTIVATE</ActivateButton>
-
-    </NavContainer>
-  );
+    
+        <HalfCircleButton onClick={() => {setIsOpen(!isOpen)}}>
+          {isOpen ? <BiChevronLeft/> : <BiChevronRight/>}
+        </HalfCircleButton>
+      </>
+    )}
+    {links && links.length > 0 && renderLinks(links)}
+    <ActivateButton onClick={handleClicked}>ACTIVATE</ActivateButton>
+    <UserManagementContainer>
+      <UserIcon src="user-icon.svg" alt="User Icon" />
+      <NotificationIcon src="notification-icon.svg" alt="Notification Icon" />
+    </UserManagementContainer>
+  </NavContainer>
+);
 };
 
 SideNav.defaultProps = {
@@ -134,14 +125,15 @@ const NavContainer = styled.nav`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 250px;
-  background-color: #f0f0f0;
+  width: 7rem;
+  background-color: #222;
+  color: teal;
 
   transition: transform 0.3s ease; /* CSS transition for smooth animation */
 
   /* Additional styles for the hidden state */
   &.hidden {
-    transform: translateX(-250px); /* Move the container off-screen */
+    transform: translateX(-7rem); /* Move the container off-screen */
   }
 `;
 
@@ -149,8 +141,10 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px;
-  background-color: #111111;
+  flex-grow: 0;
+  flex-shrink: 2;
+
+  height: 2rem;
 `;
 
 const NavItemsContainer = styled.div`
@@ -168,7 +162,7 @@ const NavItem = styled.a`
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: #333;
+  color: teal;
 
   &:hover {
     background-color: #ddd;
@@ -190,6 +184,24 @@ const UserIcon = styled.img`
 
 const NotificationIcon = styled.img`
   height: 30px;
+`;
+
+const HalfCircleButton = styled.button`
+  position: absolute;
+  top: .1rem;
+  left: 97%;
+  width: .8rem;
+  padding: 0;
+  height: 2rem;
+  border-radius: 0 2px 2px 0;
+  background-color: #222;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default SideNav;

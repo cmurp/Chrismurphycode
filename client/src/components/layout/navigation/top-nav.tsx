@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import Logo from '../../branding/logo';
 import { useSideNavStateContext } from './context/side-nav-state';
+import { BiMenuAltLeft } from 'react-icons/bi';
+import { BiCog } from 'react-icons/bi';
 
 interface TopNavigationProps {
   logo?: string;
@@ -14,7 +16,7 @@ const Navigation = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 2rem;
   background-color: #111111;
   color: teal;
   display: flex;
@@ -29,7 +31,7 @@ const Icon = styled.div`
 `;
 
 const Hamburger = styled.button`
-  font-size: 24px;
+  font-size: 1rem;
   background: none;
   color: teal;
   border: none;
