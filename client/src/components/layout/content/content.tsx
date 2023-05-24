@@ -5,6 +5,8 @@ import { useButtonClickedContext } from "../navigation/context/buttonClicked";
 import { TypingEffect } from "../../text/typing-effect";
 import Text from "../../text/text";
 
+import { LIPSUM } from "../../../constants";
+
 
 interface Props {
   children: React.ReactNode;
@@ -14,6 +16,7 @@ const ContentContainer = styled.div`
   flex: 1;
   padding: 1rem;
   margin-top: 45px;
+  overflow: scroll;
 `;
 
 
@@ -30,7 +33,8 @@ const Content: React.FC<Props> = ({ children }) => {
   return (
     <ContentContainer>
       {!isClicked && <Text>Click it.</Text>}
-      <TypingEffect text={"Lorem ipsum, etc."} isClicked={isClicked} />
+      <TypingEffect text={LIPSUM} isClicked={isClicked} speed={10} />
+
     </ContentContainer>
   );
 };

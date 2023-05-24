@@ -3,9 +3,12 @@ import styled, { keyframes } from "styled-components";
 
 import Text from "./text";
 
+type NumberOneToTen = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 interface TypingEffectProps {
   text: string;
   isClicked: boolean;
+  speed: NumberOneToTen;
 }
 
 const typingIndicatorAnimation = keyframes`
@@ -26,7 +29,7 @@ const TypingIndicator = styled.span`
   animation: ${typingIndicatorAnimation} 1s linear infinite;
 `;
 
-export const TypingEffect: React.FC<TypingEffectProps> = ({ text, isClicked }) => {
+export const TypingEffect: React.FC<TypingEffectProps> = ({ text, isClicked, speed }) => {
   const [displayText, setDisplayText] = React.useState('');
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [showTypingIndicator, setShowTypingIndicator] = React.useState(true);
@@ -48,7 +51,7 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({ text, isClicked }) =
 
   useEffect(() => {
     if (currentIndex < text.length && isClicked) {
-      const typingInterval = setInterval(handleTyping, 100); // Adjust typing speed as needed
+      const typingInterval = setInterval(handleTyping, 10/speed); // Adjust typing speed as needed
 
       return () => {
         clearInterval(typingInterval);
@@ -68,4 +71,8 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({ text, isClicked }) =
       {showTypingIndicator && <TypingIndicator>|</TypingIndicator>}
     </Text>
   );
+};
+
+TypingEffect.defaultProps = {
+  speed: 10,
 };
