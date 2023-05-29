@@ -1,5 +1,6 @@
 import './App.css';
 import Layout from './components/layout/layout';
+import { GlobalStyle } from './GlobalStyle';
 
 import styled from 'styled-components';
 
@@ -19,7 +20,7 @@ const MinContent = styled.div`
 function App() {
   return (
     <>
-      <Layout>S:)</Layout>
+        <GlobalStyle />
     </>
   );
 }
