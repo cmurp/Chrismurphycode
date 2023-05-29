@@ -1,6 +1,6 @@
 import React, { Ref } from 'react';
 import styled from 'styled-components';
-import Navigation from './navigation/navigation';
+
 import Content from './content/content';
 import { OrientationContext } from './navigation/context/orientation';
 import { ButtonClickedContext } from './navigation/context/buttonClicked';
@@ -24,7 +24,7 @@ const links = [
     { text: 'Home', href: '/' },
     { text: 'About', href: '/about' },  
     { text: 'Contact', href: '/contact' },
-];
+];  
 
 const NavContainer = styled.div`
   position: relative;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Logo from '../../branding/logo';
 import { useSideNavStateContext } from './context/side-nav-state';
@@ -9,16 +9,17 @@ import { BiCog } from 'react-icons/bi';
 interface TopNavigationProps {
   logo?: string;
   icon?: string;
+  theme?: any;
 }
 
-const Navigation = styled.nav`
+const Navigation = styled.nav<TopNavigationProps>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 2rem;
-  background-color: #111111;
-  color: teal;
+  background-color: ${(props: TopNavigationProps) => props.theme.colors.secondary};
+  color: ${(props: TopNavigationProps) => props.theme.colors.textSecondary};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,6 +41,7 @@ const Hamburger = styled.button`
 
 const TopNav: React.FC<TopNavigationProps> = ({ logo, icon }) => {
   const { isOpen, setIsOpen } = useSideNavStateContext();
+  const theme = useTheme();
 
   const handleScroll = () => {
     const navigation = document.getElementById('top-nav');
@@ -61,7 +63,7 @@ const TopNav: React.FC<TopNavigationProps> = ({ logo, icon }) => {
 
 
   return (
-    <Navigation id="top-nav">
+    <Navigation id="top-nav" theme={theme}>
       <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
       {logo && <Logo alt="logo"></Logo>}
       {icon && <Icon><BiCog/></Icon>}

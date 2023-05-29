@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Logo from '../../branding/logo';
 import { useOrientationContext } from './context/orientation';
@@ -15,6 +15,7 @@ interface Link {
 
 interface Props {
   links?: Link[];
+  theme?: any;
 }
 
 const renderLinks = (links: Link[]) => {
@@ -31,26 +32,11 @@ const renderLinks = (links: Link[]) => {
   );
 };
 
-// button with heart emoji and pink background
-const ActivateButton = styled.button`
-  background-color: #2a06ae;
-  border: none;
-  border-radius: 2%;
-  color: white;
-  cursor: pointer;
-  width: 90%;
-  margin: auto;
-  padding: 0 1rem;
-`;
-
-
-
-
-
 const SideNav: React.FC<Props> = ({ links = [] }) => {
   const { isVertical } = useOrientationContext();
   const { isOpen, setIsOpen } = useSideNavStateContext();
   const { isClicked, setIsClicked } = useButtonClickedContext();
+  const theme = useTheme();
 
   const openForHorizontal = () => {
     if (!isVertical) {
@@ -83,7 +69,7 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
   </UserManagementContainer>
 
 return (
-  <NavContainer className={`${isOpen ? '' : 'hidden'} ${isVertical ? 'absolute' : ''}`}>
+  <NavContainer className={`${isOpen ? '' : 'hidden absolute'} ${isVertical ? 'absolute' : ''}`}>
     { !isVertical && (
       <>
         <LogoContainer>
@@ -113,9 +99,13 @@ SideNav.defaultProps = {
     ]
   };
 
-const NavContainer = styled.nav`
-    /* Additional styles for absolute positioning */
-    &.absolute {
+interface ThemedProps {
+  theme: any;
+}
+
+const NavContainer = styled.nav<ThemedProps>`
+  /* Additional styles for absolute positioning */
+  &.absolute {
     position: absolute;
     top: 0;
     left: 0;
@@ -124,10 +114,12 @@ const NavContainer = styled.nav`
 
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  
   height: 100vh;
   width: 7rem;
-  background-color: #222;
-  color: teal;
+  background-color: ${(props: ThemedProps) => props.theme.colors.secondary};
+  color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
 
   transition: transform 0.3s ease; /* CSS transition for smooth animation */
 
@@ -144,12 +136,27 @@ const LogoContainer = styled.div`
   flex-grow: 0;
   flex-shrink: 2;
 
-  height: 2rem;
+  height: 3rem;
+`;
+
+// button with heart emoji and pink background
+const ActivateButton = styled.button<Props>`
+  border: none;
+  border-radius: 2%;
+  color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
+  cursor: pointer;
+  width: 90%;
+  margin: auto;
+  padding: 0 1rem;
 `;
 
 const NavItemsContainer = styled.div`
   flex: 1;
   overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const NavItems = styled.ul`
@@ -162,10 +169,10 @@ const NavItem = styled.a`
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: teal;
+  color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
 
   &:hover {
-    background-color: #ddd;
+    background-color: ${(props: ThemedProps) => props.theme.colors.main};
   }
 `;
 
@@ -174,7 +181,7 @@ const UserManagementContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 70px;
-  background-color: #e6e6e6;
+  background-color: ${(props: ThemedProps) => props.theme.colors.secondary};
 `;
 
 const UserIcon = styled.img`
@@ -194,9 +201,9 @@ const HalfCircleButton = styled.button`
   padding: 0;
   height: 2rem;
   border-radius: 0 2px 2px 0;
-  background-color: #222;
+  background-color: ${(props: ThemedProps) => props.theme.colors.secondary};
   border: none;
-  color: white;
+  color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
   font-size: 1rem;
   cursor: pointer;
   display: flex;
