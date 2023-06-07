@@ -7,6 +7,8 @@ import { useSideNavStateContext } from './context/side-nav-state';
 import { useButtonClickedContext } from './context/buttonClicked';
 
 import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
+import { FaUserAstronaut } from 'react-icons/fa';
+import { BiCog } from 'react-icons/bi'; 
 
 interface Link {
   text: string;
@@ -59,36 +61,27 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
     setIsOpen(false);
   };
   
-  {links && links.length > 0 && (
-    renderLinks(links)
-  )}
-
-  <UserManagementContainer>
-    <UserIcon src="user-icon.svg" alt="User Icon" />
-    <NotificationIcon src="notification-icon.svg" alt="Notification Icon" />
-  </UserManagementContainer>
-
-return (
-  <NavContainer className={`${isOpen ? '' : 'hidden absolute'} ${isVertical ? 'absolute' : ''}`}>
-    { !isVertical && (
-      <>
-        <LogoContainer>
-          <Logo alt="logo" />
-        </LogoContainer>
-    
-        <HalfCircleButton onClick={() => {setIsOpen(!isOpen)}}>
-          {isOpen ? <BiChevronLeft/> : <BiChevronRight/>}
-        </HalfCircleButton>
-      </>
-    )}
-    {links && links.length > 0 && renderLinks(links)}
-    <ActivateButton onClick={handleClicked}>ACTIVATE</ActivateButton>
-    <UserManagementContainer>
-      <UserIcon src="user-icon.svg" alt="User Icon" />
-      <NotificationIcon src="notification-icon.svg" alt="Notification Icon" />
-    </UserManagementContainer>
-  </NavContainer>
-);
+  return (
+    <NavContainer className={`${isOpen ? '' : 'hidden absolute'} ${isVertical ? 'absolute' : ''}`}>
+      { !isVertical && (
+        <>
+          <LogoContainer>
+            <Logo alt="logo" />
+          </LogoContainer>
+      
+          <HalfCircleButton onClick={() => {setIsOpen(!isOpen)}}>
+            {isOpen ? <BiChevronLeft/> : <BiChevronRight/>}
+          </HalfCircleButton>
+        </>
+      )}
+      {links && links.length > 0 && renderLinks(links)}
+      <ActivateButton onClick={handleClicked}>ACTIVATE</ActivateButton>
+      <LogoContainer>
+        <FaUserAstronaut />
+        <BiCog />
+      </LogoContainer>
+    </NavContainer>
+  );
 };
 
 SideNav.defaultProps = {
@@ -143,6 +136,7 @@ const LogoContainer = styled.div`
 const ActivateButton = styled.button<Props>`
   border: none;
   border-radius: 2%;
+  background-color: ${(props: ThemedProps) => props.theme.colors.accent};
   color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
   cursor: pointer;
   width: 90%;
@@ -176,23 +170,6 @@ const NavItem = styled.a`
   }
 `;
 
-const UserManagementContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70px;
-  background-color: ${(props: ThemedProps) => props.theme.colors.secondary};
-`;
-
-const UserIcon = styled.img`
-  height: 30px;
-  margin-right: 10px;
-`;
-
-const NotificationIcon = styled.img`
-  height: 30px;
-`;
-
 const HalfCircleButton = styled.button`
   position: absolute;
   top: .1rem;
@@ -207,7 +184,7 @@ const HalfCircleButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
